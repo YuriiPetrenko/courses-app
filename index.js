@@ -7,8 +7,8 @@ const mongoose = require('mongoose')
 const addRoutes = require('./routes/add')
 const courseRoutes = require('./routes/courses')
 const cardRoute = require('./routes/card')
+const ordersRoutes = require('./routes/orders')
 const User = require('./models/user')
-const { nextTick } = require('process')
 
 //configure handlebars
 const hbs = exphbs.create({
@@ -39,6 +39,7 @@ app.use('/',homeRoutes)
 app.use('/add',addRoutes)
 app.use('/courses',courseRoutes)
 app.use('/card', cardRoute)
+app.use('/orders', ordersRoutes)
 
 const PORT = process.env.PORT || 3000
 async function start() {
