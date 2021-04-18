@@ -13,6 +13,7 @@ const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const User = require('./models/user')
 const varMiddleware = require('./middleware/variables')
+const userMiddleware = require('./middleware/user')
 
 const MONGODB_URI = 'mongodb+srv://yurii:2cAbstiUiKTi91LY@cluster0.ahyc9.mongodb.net/shop?retryWrites=true&w=majority'
 //configure handlebars
@@ -38,7 +39,7 @@ app.use(session({
   store
 }))
 app.use(varMiddleware)
-
+app.use(userMiddleware)
 
 //Routs registaration
 app.use('/',homeRoutes)
