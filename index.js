@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const csrf = require('csurf')
 const app = express()
 const exphbs = require('express-handlebars')
 const session = require('express-session')
@@ -38,6 +39,7 @@ app.use(session({
   saveUninitialized: false,
   store
 }))
+app.use(csrf())
 app.use(varMiddleware)
 app.use(userMiddleware)
 
@@ -54,16 +56,6 @@ const PORT = process.env.PORT || 3000
 async function start() {
   try {
     await mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-
-    // const candidate = await User.findOne()
-    // if (!candidate){
-    //   const user = new User({
-    //     email: 'example@gmail.com',
-    //     name: 'yurii',
-    //     cart: {items:[]}
-    //   })
-    //   await user.save()
-    // }
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
